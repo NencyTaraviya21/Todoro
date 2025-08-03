@@ -4,7 +4,7 @@
 // class TaskService {
 //   final String baseUrl = 'https://67c6fd70c19eb8753e782e89.mockapi.io/todoro';
 //
-//   Future<List<Task>> fetchTasks() async {
+//   Future<List<TaskModel>> fetchTasks() async {
 //     final response = await http.get(Uri.parse(baseUrl));
 //     if (response.statusCode == 200) {
 //       final List jsonData = json.decode(response.body);

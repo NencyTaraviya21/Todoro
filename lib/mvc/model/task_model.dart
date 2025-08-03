@@ -4,10 +4,10 @@ class TaskModel {
   final int? id;
   final int userId;
   final String title;
-  final String description;
+  final String ? description;
   final TaskPriority priority;
-  final DateTime? deadline;
-  final int estimatedPomodoros;
+  final DateTime? deadLine;
+  final int ? estimatedPomodoros;
   final int completedPomodoros;
   final bool isCompleted;
   final DateTime createdAt;
@@ -17,10 +17,10 @@ class TaskModel {
     this.id,
     required this.userId,
     required this.title,
-    required this.description,
+    this.description,
     required this.priority,
-    this.deadline,
-    required this.estimatedPomodoros,
+    this.deadLine,
+    this.estimatedPomodoros,
     this.completedPomodoros = 0,
     this.isCompleted = false,
     required this.createdAt,
@@ -34,7 +34,7 @@ class TaskModel {
       'title': title,
       'description': description,
       'priority': priority.name,
-      'deadline': deadline?.toIso8601String(),
+      'deadline': deadLine?.toIso8601String(),
       'estimatedPomodoros': estimatedPomodoros,
       'completedPomodoros': completedPomodoros,
       'isCompleted': isCompleted ? 1 : 0,
@@ -53,7 +53,7 @@ class TaskModel {
             (p) => p.name == map['priority'],
         orElse: () => TaskPriority.medium,
       ),
-      deadline: map['deadline'] != null ? DateTime.parse(map['deadline']) : null,
+      deadLine: map['deadline'] != null ? DateTime.parse(map['deadline']) : null,
       estimatedPomodoros: map['estimatedPomodoros'],
       completedPomodoros: map['completedPomodoros'] ?? 0,
       isCompleted: map['isCompleted'] == 1,
@@ -81,7 +81,7 @@ class TaskModel {
       title: title ?? this.title,
       description: description ?? this.description,
       priority: priority ?? this.priority,
-      deadline: deadline ?? this.deadline,
+      deadLine: deadline ?? this.deadLine,
       estimatedPomodoros: estimatedPomodoros ?? this.estimatedPomodoros,
       completedPomodoros: completedPomodoros ?? this.completedPomodoros,
       isCompleted: isCompleted ?? this.isCompleted,
@@ -89,6 +89,8 @@ class TaskModel {
       updatedAt: updatedAt ?? this.updatedAt,
     );
   }
+
+
 
   @override
   String toString() {
