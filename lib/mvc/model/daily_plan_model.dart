@@ -1,9 +1,10 @@
-import 'package:todoro/import_export/todoro_import_export.dart';
+import 'package:flutter/material.dart';
+import 'package:todoro/mvc/model/enums.dart';
 
 class DailyPlanModel {
   final int? id;
   final int userId;
-  final int? taskId; // Reference to TaskModel, nullable for standalone plans
+  final int? taskId;
   final String title;
   final String? description;
   final TaskCategory category;

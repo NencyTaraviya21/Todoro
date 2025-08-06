@@ -1,4 +1,8 @@
-import 'package:todoro/import_export/todoro_import_export.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:todoro/mvc/model/daily_plan_model.dart';
+import 'package:todoro/mvc/model/enums.dart';
+import 'package:todoro/mvc/contoller/pomodoro_controller.dart';
 
 class DailyPlanController extends GetxController {
   // Observable variables
@@ -50,20 +54,6 @@ class DailyPlanController extends GetxController {
     });
   }
 
-  // Get plans by category for selected date
-  Map<TaskCategory, List<DailyPlanModel>> get plansByCategory {
-    final Map<TaskCategory, List<DailyPlanModel>> categorizedPlans = {};
-    
-    for (final plan in plansForSelectedDate) {
-      if (!categorizedPlans.containsKey(plan.category)) {
-        categorizedPlans[plan.category] = [];
-      }
-      categorizedPlans[plan.category]!.add(plan);
-    }
-    
-    return categorizedPlans;
-  }
-
   // Statistics
   int get totalPlansForDate => plansForSelectedDate.length;
   int get completedPlansForDate => plansForSelectedDate.where((p) => p.isCompleted).length;
@@ -98,11 +88,8 @@ class DailyPlanController extends GetxController {
       _errorMessage.value = '';
       
       // TODO: Implement database service call
-      // final plans = await DailyPlanService.getPlansForDate(date);
-      // _dailyPlans.assignAll(plans);
-      
       // For now, we'll use mock data
-      await Future.delayed(const Duration(milliseconds: 500)); // Simulate API call
+      await Future.delayed(const Duration(milliseconds: 500));
       
     } catch (e) {
       _errorMessage.value = 'Failed to load plans: ${e.toString()}';
@@ -118,9 +105,6 @@ class DailyPlanController extends GetxController {
       _errorMessage.value = '';
       
       // TODO: Implement database service call
-      // final createdPlan = await DailyPlanService.createPlan(plan);
-      // _dailyPlans.add(createdPlan);
-      
       // For now, add to local list with generated ID
       final newPlan = plan.copyWith(
         id: DateTime.now().millisecondsSinceEpoch,
@@ -144,9 +128,6 @@ class DailyPlanController extends GetxController {
       _isLoading.value = true;
       _errorMessage.value = '';
       
-      // TODO: Implement database service call
-      // await DailyPlanService.updatePlan(plan);
-      
       final index = _dailyPlans.indexWhere((p) => p.id == plan.id);
       if (index != -1) {
         _dailyPlans[index] = plan.copyWith(updatedAt: DateTime.now());
@@ -166,9 +147,6 @@ class DailyPlanController extends GetxController {
     try {
       _isLoading.value = true;
       _errorMessage.value = '';
-      
-      // TODO: Implement database service call
-      // await DailyPlanService.deletePlan(planId);
       
       _dailyPlans.removeWhere((plan) => plan.id == planId);
       
@@ -198,35 +176,13 @@ class DailyPlanController extends GetxController {
   Future<void> startPomodoroSession(int planId) async {
     final plan = _dailyPlans.firstWhereOrNull((p) => p.id == planId);
     if (plan != null) {
-      // TODO: Create a task if needed and start pomodoro
-      // For now, we'll start with a default task ID
-      final pomodoroController = Get.find<PomodoroController>();
-      await pomodoroController.startPomodoro(1); // Using default task ID for now
+      try {
+        final pomodoroController = Get.find<PomodoroController>();
+        await pomodoroController.startPomodoro(1); // Using default task ID
+      } catch (e) {
+        print('Error starting pomodoro: $e');
+      }
     }
-  }
-
-  // Get next planned task
-  DailyPlanModel? get nextPlannedTask {
-    final now = TimeOfDay.now();
-    final currentMinutes = now.hour * 60 + now.minute;
-    
-    final upcomingTasks = plansForSelectedDate
-        .where((plan) => !plan.isCompleted && plan.startTime != null)
-        .where((plan) {
-          final planMinutes = plan.startTime!.hour * 60 + plan.startTime!.minute;
-          return planMinutes >= currentMinutes;
-        })
-        .toList();
-    
-    if (upcomingTasks.isEmpty) return null;
-    
-    upcomingTasks.sort((a, b) {
-      final aMinutes = a.startTime!.hour * 60 + a.startTime!.minute;
-      final bMinutes = b.startTime!.hour * 60 + b.startTime!.minute;
-      return aMinutes.compareTo(bMinutes);
-    });
-    
-    return upcomingTasks.first;
   }
 
   // Create repeated plans based on repeat type

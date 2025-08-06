@@ -1,4 +1,9 @@
-import 'package:todoro/import_export/todoro_import_export.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:todoro/mvc/contoller/daily_plan_controller.dart';
+import 'package:todoro/mvc/model/daily_plan_model.dart';
+import 'package:todoro/mvc/model/enums.dart';
+import 'package:todoro/mvc/view/pages/enhanced_task_creation.dart';
 
 class DailyPlanningPage extends StatelessWidget {
   const DailyPlanningPage({Key? key}) : super(key: key);
@@ -335,7 +340,7 @@ class DailyPlanningPage extends StatelessWidget {
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.timer,
                       size: 16,
                       color: Colors.grey,
