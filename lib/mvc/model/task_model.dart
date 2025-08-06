@@ -6,6 +6,7 @@ class TaskModel {
   final String title;
   final String ? description;
   final TaskPriority priority;
+  final TaskCategory category;
   final DateTime? deadLine;
   final int ? estimatedPomodoros;
   final int completedPomodoros;
@@ -19,6 +20,7 @@ class TaskModel {
     required this.title,
     this.description,
     required this.priority,
+    required this.category,
     this.deadLine,
     this.estimatedPomodoros,
     this.completedPomodoros = 0,
@@ -34,6 +36,7 @@ class TaskModel {
       'title': title,
       'description': description,
       'priority': priority.name,
+      'category': category.name,
       'deadline': deadLine?.toIso8601String(),
       'estimatedPomodoros': estimatedPomodoros,
       'completedPomodoros': completedPomodoros,
@@ -53,6 +56,10 @@ class TaskModel {
             (p) => p.name == map['priority'],
         orElse: () => TaskPriority.medium,
       ),
+      category: TaskCategory.values.firstWhere(
+            (c) => c.name == map['category'],
+        orElse: () => TaskCategory.other,
+      ),
       deadLine: map['deadline'] != null ? DateTime.parse(map['deadline']) : null,
       estimatedPomodoros: map['estimatedPomodoros'],
       completedPomodoros: map['completedPomodoros'] ?? 0,
@@ -68,6 +75,7 @@ class TaskModel {
     String? title,
     String? description,
     TaskPriority? priority,
+    TaskCategory? category,
     DateTime? deadline,
     int? estimatedPomodoros,
     int? completedPomodoros,
@@ -81,6 +89,7 @@ class TaskModel {
       title: title ?? this.title,
       description: description ?? this.description,
       priority: priority ?? this.priority,
+      category: category ?? this.category,
       deadLine: deadline ?? this.deadLine,
       estimatedPomodoros: estimatedPomodoros ?? this.estimatedPomodoros,
       completedPomodoros: completedPomodoros ?? this.completedPomodoros,

@@ -29,3 +29,8 @@ export 'package:todoro/mvc/view/pages/login_signup_page.dart';
 export 'package:todoro/services/bindings/todoro_bindings.dart';
 export 'package:todoro/mvc/contoller/dashboard_controllers/dashboard_controller.dart';
 export 'package:todoro/mvc/view/pages/floating_timer.dart';
+export 'package:todoro/mvc/model/daily_plan_model.dart';
+export 'package:todoro/mvc/contoller/daily_plan_controller.dart';
+export 'package:todoro/mvc/view/pages/enhanced_task_creation.dart';
+export 'package:todoro/mvc/view/pages/daily_planning_page.dart';
+export 'package:todoro/mvc/view/pages/main_navigation_page.dart';
