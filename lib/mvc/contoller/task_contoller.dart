@@ -74,6 +74,7 @@ class TaskController extends GetxController {
     required String title,
     String? description,
     required TaskPriority priority,
+    TaskCategory category = TaskCategory.other,
     DateTime? deadline, // Keep parameter name as deadline for consistency with UI
     int? estimatedPomodoros,
     int userId = 1,
@@ -85,6 +86,7 @@ class TaskController extends GetxController {
         title: title,
         description: description ?? "No description",
         priority: priority,
+        category: category,
         deadLine: deadline, // Map to deadLine property
         estimatedPomodoros: estimatedPomodoros ?? 1,
         createdAt: now,

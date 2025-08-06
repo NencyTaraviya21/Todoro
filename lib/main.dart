@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/dashboard',
-          page: () => CommonAppBar(title: "m=new"), // Your home/dashboard page
+          page: () => const MainNavigationPage(), // Your home/dashboard page
         ),
       ],
     );
