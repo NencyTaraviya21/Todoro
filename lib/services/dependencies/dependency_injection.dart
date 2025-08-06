@@ -1,5 +1,6 @@
 import 'package:todoro/import_export/todoro_import_export.dart';
 
+
 class DependencyInjection {
   static Future<void> init() async {
     await Get.putAsync(()async => await DatabaseService().init());
@@ -11,6 +12,7 @@ class DependencyInjection {
     Get.put<IStorageService>(StorageService());
     Get.put<IAuthRepository>(AuthRepository());
     Get.put<AuthService>(AuthService());
+    Get.lazyPut(()=>DashboardController());
 
   }
 }

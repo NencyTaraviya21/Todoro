@@ -427,7 +427,14 @@ class DashboardController extends GetxController {
   }
 
   void navigateToAddTask([TaskModel? task]) {
-    Get.to(() => AddTask(task: task));
+    if (task != null) {
+
+      // Edit existing task - explicitly set isEdit to true
+      Get.to(() => AddTask(isEdit: true, task: task));
+    } else {
+      // Create new task - explicitly set isEdit to false
+      Get.to(() => AddTask(isEdit: false, task: null));
+    }
   }
 
   void handleMenuSelection(String value) {

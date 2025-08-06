@@ -4,6 +4,7 @@ import 'package:todoro/import_export/todoro_import_export.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DependencyInjection.init();
+  await Get.put(DashboardController());
   await GetStorage.init();
   runApp(MyApp());
 }
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       initialBinding: AuthBinding(),
-      home: AddTask(),
+      home: AuthPage(),
       getPages: [
         GetPage(
           name: '/auth',
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/dashboard',
-          page: () => Dashboard(), // Your home/dashboard page
+          page: () => CommonAppBar(title: "m=new"), // Your home/dashboard page
         ),
       ],
     );

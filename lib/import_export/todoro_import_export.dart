@@ -27,3 +27,5 @@ export 'package:todoro/repositories/login_signup_page_repo.dart';
 export 'package:todoro/mvc/view/widgets/common_textfield.dart';
 export 'package:todoro/mvc/view/pages/login_signup_page.dart';
 export 'package:todoro/services/bindings/todoro_bindings.dart';
+export 'package:todoro/mvc/contoller/dashboard_controllers/dashboard_controller.dart';
+export 'package:todoro/mvc/view/pages/floating_timer.dart';

@@ -42,6 +42,7 @@ dev_dependencies:
   http:
   sqflite: ^2.4.2
   get_storage:
+  intl:
 
 
   # The "flutter_lints" package below contains a set of recommended lints to

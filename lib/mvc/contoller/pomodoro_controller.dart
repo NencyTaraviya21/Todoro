@@ -142,6 +142,14 @@ class PomodoroController extends GetxController {
       Get.snackbar('Info', 'Pomodoro paused');
     }
   }
+  // void _resetTimer() {
+  //   _timer?.cancel();
+  //   setState(() {
+  //     remaining = totalSeconds;
+  //     running = false;
+  //   });
+  // }
+
 
   // Resume pomodoro
   void resumePomodoro() {
@@ -226,5 +234,6 @@ class PomodoroController extends GetxController {
     }
     return total;
   }
+
 }
 

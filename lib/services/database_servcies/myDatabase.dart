@@ -27,14 +27,14 @@ class DatabaseService extends GetxService {
   Future<void> createTables(Database db, int version) async {
     // region Tasks table
     await db.execute('''
-      CREATE TABLE tasks (
+      CREATE TABLE $TASK_TABLE (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         userId INTEGER NOT NULL,
         title VARCHAR(255) NOT NULL,
         description TEXT,
         priority VARCHAR(20) NOT NULL DEFAULT 'medium',
-        deadline DATETIME,
-        estimatedPomodoros INTEGER NOT NULL DEFAULT 1,
+        deadLine DATETIME,
+        estimatedPomodoros INTEGER NOT NULL DEFAULT 0,
         completedPomodoros INTEGER NOT NULL DEFAULT 0,
         isCompleted BOOLEAN NOT NULL DEFAULT 0,
         createdAt DATETIME NOT NULL,
@@ -44,7 +44,7 @@ class DatabaseService extends GetxService {
   //endregion
     // region PomodoroSessions table
     await db.execute('''
-      CREATE TABLE pomodoroSessions (
+      CREATE TABLE $POMODORO_SESSIONS_TABLE (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         taskId INTEGER NOT NULL,
         startTime DATETIME NOT NULL,

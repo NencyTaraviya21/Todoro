@@ -174,9 +174,13 @@ class TaskController extends GetxController {
     final today = DateTime(now.year, now.month, now.day);
 
     return _tasks.where((task) {
-      if (task.deadLine == null || task.isCompleted) return false;
-      final taskDate = DateTime(task.deadLine!.year, task.deadLine!.month, task.deadLine!.day);
-      return taskDate.isBefore(today);
+
+      if (task.deadLine != null) {
+        final taskDate = DateTime(
+            task.deadLine!.year, task.deadLine!.month, task.deadLine!.day);
+        return taskDate.isBefore(today);
+      }
+      return false;
     }).toList();
   }
 
@@ -185,9 +189,12 @@ class TaskController extends GetxController {
     final today = DateTime(now.year, now.month, now.day);
 
     return _tasks.where((task) {
-      if (task.deadLine == null || task.isCompleted) return false;
-      final taskDate = DateTime(task.deadLine!.year, task.deadLine!.month, task.deadLine!.day);
-      return taskDate.isAtSameMomentAs(today);
+      if (task.deadLine != null) {
+        final taskDate = DateTime(
+            task.deadLine!.year, task.deadLine!.month, task.deadLine!.day);
+        return taskDate.isAtSameMomentAs(today);
+      }
+      return false;
     }).toList();
   }
   //endregion
