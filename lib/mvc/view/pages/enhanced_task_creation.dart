@@ -256,8 +256,8 @@ class _EnhancedTaskCreationPageState extends State<EnhancedTaskCreationPage> {
   Widget _buildPomodoroSessionSelector() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: List.generate(5, (index) {
-        final sessionCount = index + 1;
+      children: List.generate(5, (sessionIndex) {
+        final sessionCount = sessionIndex + 1;
         final isSelected = sessionCount == _pomodoroSessions;
         
         return GestureDetector(
